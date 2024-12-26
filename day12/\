@@ -1,0 +1,11 @@
+content = []
+with open("input.txt") as file:
+    content = file.read().strip().split("\n")
+
+
+def getRegion(x, y, content):
+    letter = content[x][y]
+
+    
+
+    pass
