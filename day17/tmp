@@ -1,0 +1,12 @@
+
+
+
+B = A % 8
+B = B xor 3
+C = A / 2^B
+B = B xor 5 
+A = A / 2^3
+B = B xor C
+out B
+
+jnz(0)

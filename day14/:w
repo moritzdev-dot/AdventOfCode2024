@@ -1,0 +1,25 @@
+import numpy as np
+content = []
+with open("input.txt") as file:
+    content = file.read().strip().split("\n")
+
+
+WIDTH = 101
+HEIGHT = 103
+TIME_STEPS = 100
+
+for line in content:
+    l = line.strip().split(" ")
+    num1 = int(l[0][l[0].find("=")+1:l[0].find(",")])
+    num2 = int(l[0][l[0].find(",")+1:])
+    p = [num1, num2]
+    num1 = int((l[1][l[1].find("=")+1:l[1].find(",")]))
+    num2 = int(l[1][l[1].find(",")+1:])
+    v = np.array([num1, num2])
+    m = (v * TIME_STEPS + p) % np.array([WIDTH, HEIGHT])
+    print(m)
+
+
+
+
+

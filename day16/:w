@@ -1,0 +1,65 @@
+import numpy as np
+import heapq
+
+content = []
+with open("input.txt") as file:
+    content = file.read().strip().split()
+
+goal = None
+start = None
+
+for i in range(len(content)):
+    for j in range(len(content[0])):
+        if content[i][j] == "E":
+            goal = (i, j)
+        elif content[i][j] == "S":
+            start = (i, j)
+
+if goal is None or start is None:
+    exit()
+
+
+dirs = [
+    (1, 0),
+    (-1, 0),
+    (0, 1),
+    (0, -1),
+]
+
+stack = [(0, start, None)]
+
+visited = set()
+costs = []
+
+while len(stack) > 0:
+    cost, node, d = heapq.heappop(stack)
+    if node[0] == goal[0] and node[1] == goal[1]:
+        costs.append(cost)
+        continue
+
+    for dir in dirs:
+        pos = (node[0] + dir[0], node[1] + dir[1])
+
+        if (pos, dir) in visited:
+            continue
+
+        visited.add((pos, dir))
+
+        if content[pos[0]][pos[1]] not in ".E":
+            continue
+
+        if d == None:
+            new = cost + 1
+        elif dir[0] == d[0] and dir[1] == d[1]:
+            new = cost + 1
+        else:
+            new = cost + 1001
+
+        heapq.heappush(stack, (new, pos, dir))
+
+
+
+
+
+
+print(costs)
